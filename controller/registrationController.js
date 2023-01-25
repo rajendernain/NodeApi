@@ -15,7 +15,7 @@ var userReg = async (req, res) => {
         if (result.length > 0) {
             return res.json({
                 status: "faild",
-                message: "User already exists"
+                message: "User already exists with this email"
             });
         } else {
             if (name && email && phone && pass && confPassword) {
