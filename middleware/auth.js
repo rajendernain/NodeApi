@@ -25,6 +25,7 @@ var checkRegisterUser = function(req,res,next){
     var name = (req.body.name)?req.body.name:"";
     var email = (req.body.email)?req.body.email:"";
     var phone = (req.body.phone)?req.body.phone:"";
+    var address = (req.body.address)?req.body.address:"";
     var confPassword = (req.body.confPassword)?req.body.confPassword:"";
     var password = (req.body.password)?req.body.password:"";
     var errors = [];
@@ -34,6 +35,8 @@ var checkRegisterUser = function(req,res,next){
         errors.push("email field is required.");
     }else if(phone == ''){
         errors.push("phone field is required.");
+    }else if(address == ''){
+        errors.push("address field is required.");
     }else if(password == ''){
         errors.push("password field is required.");
     }else if(confPassword == ''){
@@ -70,7 +73,7 @@ var verifyToken = function(req,res,next){
         if (verifyToken.device_id == req.headers.device_id) {
             req.user_data = verifyToken.user_id;
         }else{
-            req.user_data = false;
+            req.user_data = 0;
         }
     }catch(err){
         return res.status(401).json({

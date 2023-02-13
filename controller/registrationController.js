@@ -6,6 +6,7 @@ var userReg = async (req, res) => {
     const name = (req.body.name) ? req.body.name : '';
     const email = (req.body.email) ? req.body.email : '';
     const phone = (req.body.phone) ? req.body.phone : '';
+    const address = (req.body.address) ? req.body.address : '';
     const pass = (req.body.password) ? req.body.password : '';
     const confPassword = (req.body.confPassword) ? req.body.confPassword : '';
     const device_id = (req.headers.device_id) ? req.headers.device_id : '';
@@ -18,7 +19,7 @@ var userReg = async (req, res) => {
                 message: "User already exists with this email"
             });
         } else {
-            if (name && email && phone && pass && confPassword) {
+            if (name && email && phone && address && pass && confPassword) {
                 if (pass === confPassword) {
                     try {
                         const salt = await bcrypt.genSalt(10);
@@ -27,6 +28,7 @@ var userReg = async (req, res) => {
                             name:name,
                             email:email,
                             phone:phone,
+                            address:address,
                             hashPassword:hashPassword,
                         }
                         let qry_result = await common.insertUserRegister(data);

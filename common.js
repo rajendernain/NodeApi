@@ -6,6 +6,11 @@ var getUserByEmail = async (email)=>{
     var qry = "Select * from users Where email='" +email+"' ORDER BY email LIMIT 1";
      let [result] = await con.query(qry);
     return result;
+}//Get user details by user_id
+var getUserByUserId = async (user_id)=>{
+    var qry = "Select * from users Where user_id='" +user_id+"' ORDER BY email LIMIT 1";
+     let [result] = await con.query(qry);
+    return result;
 }
 //Update user access token 
 var updateAccessToken = async (user_id,access_token)=>{
@@ -25,9 +30,9 @@ var generateAccessToken = async (device_id,user_id)=>{
     return access_token;
 }
 var insertUserRegister = async (data)=>{
-    let sql = "INSERT INTO users (name,email,phone,password,token,date_added) VALUES ('" + data.name + "','" + data.email + "','" + data.phone + "','" + data.hashPassword + "','','" + Date.now() + "')";
+    let sql = "INSERT INTO users (name,email,phone,address,password,token,date_added) VALUES ('" + data.name + "','" + data.email + "','" + data.phone + "','" + data.address + "','" + data.hashPassword + "','','" + Date.now() + "')";
     let [qry_result] = await con.query(sql);
     return qry_result;
 }
 
-module.exports={getUserByEmail,updateAccessToken,generateAccessToken,insertUserRegister};
+module.exports={getUserByEmail,updateAccessToken,generateAccessToken,insertUserRegister,getUserByUserId};
