@@ -8,6 +8,7 @@ const changeUserPassword = require('./controller/changePasswordController');
 const sendUserPasswordResetEmail = require('./controller/sendUserPasswordResetController');
 const updateUser = require('./controller/updateUSerController');
 const userProfile = require('./controller/userProfileController');
+const uploadProfile = require('./controller/uploadController');
 const file = require('./controller/fileController');
 
 router.post('/login', checkValidUser.checkValidUser, userLogin.userLogin);
@@ -18,6 +19,7 @@ router.post('/reset-password/:id/:token',sendUserPasswordResetEmail.userPassword
 router.post('/updateUser',checkValidUser.verifyToken, updateUser.updateUser);
 router.post('/deleteUser',checkValidUser.verifyToken, updateUser.deleteUser);
 router.post('/profile',checkValidUser.verifyToken,userProfile.userProfile);
+router.post('/uploadProfile',checkValidUser.verifyToken,uploadProfile.uploadProfile);
 router.post('/file',file.fileSystem);
 
 

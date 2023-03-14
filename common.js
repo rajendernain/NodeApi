@@ -8,7 +8,7 @@ var getUserByEmail = async (email)=>{
     return result;
 }//Get user details by user_id
 var getUserByUserId = async (user_id)=>{
-    var qry = "Select * from users Where user_id='" +user_id+"' ORDER BY email LIMIT 1";
+    var qry = "Select u.user_id, u.name, u.email, u.phone, u.address, p.image from users as u INNER JOIN product as p ON u.user_id = p.user_id Where u.user_id='" +user_id+"' ORDER BY u.user_id DESC LIMIT 1";
      let [result] = await con.query(qry);
     return result;
 }
